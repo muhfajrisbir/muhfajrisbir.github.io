@@ -1,0 +1,69 @@
+img {
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: -20px;
+}
+body {
+  background-color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+.container {
+  text-align: center;
+}
+.nama {
+  background: linear-gradient(-80deg, #0030b3, #0fe6f5);
+  background: -webkit-linear-gradient(-80deg, #0030b3, #0fe6f5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.wave {
+  animation-name: wave-animation;
+  animation-duration: 2.5s;
+  animation-iteration-count: infinite;
+  transform-origin: 70% 70%;
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  30% {
+    transform: rotate(14deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@media only screen and (max-width: 600px) {
+  img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: -15px;
+  }
+  h1 {
+    font-size: 16px;
+  }
+}

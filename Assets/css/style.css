@@ -8,7 +8,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 75vh;
+  height: 100vh;
   margin: 0;
   font-family: "Poppins", sans-serif;
   text-align: center;
@@ -59,11 +59,11 @@ body {
 }
 @media only screen and (max-width: 600px) {
   img {
-    width: 80px;
-    height: 80px;
+    width: 84px;
+    height: 84px;
     margin-bottom: -15px;
   }
   h1 {
-    font-size: 16px;
+    font-size: 20px;
   }
 }

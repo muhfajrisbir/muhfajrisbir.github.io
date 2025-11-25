@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Fajri</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --lime: #D4FF5F;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-light: #F8F8F8;
+            --border-color: #E5E5E5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; } /* Efek scroll halus */
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--black);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- NAVBAR (LENGKAP & FUNGSIONAL) --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: var(--lime);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.5rem; 
+            letter-spacing: -0.5px; 
+            color: var(--black);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link { 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            color: var(--black); 
+            cursor: pointer;
+            position: relative;
+        }
+        
+        /* Efek garis bawah saat hover */
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--black);
+            transition: width 0.3s;
+            margin-top: 2px;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        .btn-contact {
+            background: var(--black);
+            color: var(--lime);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .btn-contact:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(to bottom, var(--lime) 50%, var(--white) 100%);
+            min-height: 90vh; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10; 
+            max-width: 700px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 0; /* Tambah padding biar aman dari chip */
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 8vw, 5rem);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin: 0;
+            color: var(--black);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 500px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .btn-main {
+            background: var(--black);
+            color: var(--lime);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
+
+        /* --- CHIPS (SOLID & FLOATING) --- */
+        .chip {
+            position: absolute;
+            background: var(--white); /* Putih Solid */
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Bayangan halus */
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 5; /* Tetap di bawah teks (z-index 10), tapi di atas background */
+            white-space: nowrap;
+            pointer-events: none; 
+        }
+
+        /* Posisi Desktop */
+        @media (min-width: 769px) {
+            .chip:nth-child(1) { top: -40px; left: -100px; animation: float 5s ease-in-out infinite; }
+            .chip:nth-child(2) { top: 20px; right: -110px; animation: float 6s ease-in-out infinite 1s; }
+            .chip:nth-child(3) { bottom: 60px; left: -120px; animation: float 5.5s ease-in-out infinite 0.5s; }
+            .chip:nth-child(4) { bottom: 30px; right: -90px; animation: float 6.5s ease-in-out infinite 1.5s; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 5% 6rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--gray-light);
+            display: inline-block;
+            padding-right: 2rem;
+        }
+
+        /* --- PROJECTS GRID --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { border-color: var(--lime); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        
+        .card-img { height: 180px; width: 100%; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .project-card:hover .card-img img { transform: scale(1.05); }
+
+        .card-info { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag { font-size: 0.7rem; font-weight: 800; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .card-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.3; }
+        .card-info p { font-size: 0.9rem; color: #555; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1; }
+        .view-btn { font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; color: var(--black); }
+
+        /* --- CERTIFICATES --- */
+        .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
+        .cert-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--lime);
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .cert-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .cert-text span { font-size: 0.85rem; color: #666; }
+        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border: 1px solid #ddd; border-radius: 6px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: linear-gradient(to top, var(--black) 0%, #1a1a1a 100%);
+            color: white; padding: 4rem 5%; text-align: center; position: relative; overflow: hidden;
+        }
+        footer h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--lime); }
+        footer p { color: #aaa; margin-bottom: 2rem; }
+        .footer-link { color: white; font-weight: 600; border-bottom: 1px solid var(--lime); padding-bottom: 2px; }
+
+        /* --- MOBILE RESPONSIVE FIX --- */
+        @media (max-width: 768px) {
+            /* Navbar Mobile */
+            nav { padding: 0.8rem 5%; }
+            .nav-menu { gap: 1rem; }
+            .nav-link { display: none; } /* Sembunyikan menu text di mobile biar gak penuh */
+            .btn-contact { display: block; } /* Tombol contact tetap ada */
+            
+            /* Hero Mobile */
+            .hero {
+                min-height: auto;
+                padding-top: 3rem;
+                padding-bottom: 5rem;
+            }
+
+            /* CHIP MOBILE (POSISI AMAN) */
+            /* Letakkan chips di area padding kosong Hero, bukan di tengah teks */
+            .chip {
+                font-size: 0.7rem; 
+                padding: 0.5rem 0.9rem;
+            }
+            
+            /* Kiri Atas Jauh */
+            .chip:nth-child(1) { top: -20px; left: -10px; animation: float 4s infinite; }
+            /* Kanan Atas Jauh */
+            .chip:nth-child(2) { top: -10px; right: -10px; animation: float 5s infinite 1s; }
+            /* Kiri Bawah Jauh */
+            .chip:nth-child(3) { top: auto; bottom: -30px; left: 0; animation: float 4.5s infinite 0.5s; }
+            /* Kanan Bawah Jauh */
+            .chip:nth-child(4) { top: auto; bottom: -20px; right: 0; animation: float 6s infinite 1.5s; }
+
+            .project-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .cert-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .btn-sm { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Lengkap & Sticky -->
+    <nav>
+        <div class="logo">FAJRI.</div>
+        <div class="nav-menu">
+            <!-- Menu Navigasi -->
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#certs" class="nav-link">Certificates</a>
+            <!-- Tombol Contact -->
+            <a href="#contact" class="btn-contact">Let's Talk</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <!-- Chips Putih Solid & Floating Aman -->
+            <div class="chip">User Research</div>
+            <div class="chip">UI Design</div>
+            <div class="chip">Prototyping</div>
+            <div class="chip">Business Metrics</div>
+
+            <h1>Designing for<br>Real Impact.</h1>
+            <p>
+                Researcher & UI Designer. Mengubah data kompleks menjadi antarmuka yang sederhana dan fungsional.
+            </p>
+
+            <a href="#" class="btn-main">
+                Download CV 
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <!-- ID Projects untuk Scroll Navigasi -->
+        <div id="projects" style="padding-top: 2rem; margin-top: -2rem;"></div>
+        <h2 class="section-title">Selected Projects</h2>
+        
+        <div class="project-grid">
+            <article class="project-card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1000&auto=format&fit=crop" alt="UI Design">
+                </div>
+                <div class="card-info">
+                    <span class="tag">App Redesign</span>
+                    <h3>iJakarta Library</h3>
+                    <p>Redesign aplikasi perpustakaan digital untuk meningkatkan retensi pembaca.</p>
+                    <div class="view-btn">View Case Study &rarr;</div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Data Research">
+                </div>
+                <div class="card-info">
+                    <span class="tag">Research</span>
+                    <h3>Thesis Study</h3>
+                    <p>Studi validasi kepuasan pengguna (Mixed-Methods) dengan skala Likert.</p>
+                    <div class="view-btn">Read Abstract &rarr;</div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Dashboard">
+                </div>
+                <div class="card-info">
+                    <span class="tag">Dashboard</span>
+                    <h3>CRM Analytics</h3>
+                    <p>Visualisasi data pelanggan B2B untuk tracking KPI bisnis real-time.</p>
+                    <div class="view-btn">View Prototype &rarr;</div>
+                </div>
+            </article>
+        </div>
+
+        <!-- ID Certs untuk Scroll Navigasi -->
+        <div id="certs" style="padding-top: 4rem; margin-top: -4rem;"></div>
+        <h2 class="section-title">Certifications</h2>
+
+        <div class="cert-list">
+            <div class="cert-item">
+                <div class="cert-text">
+                    <h4>Google UX Design Professional Certificate</h4>
+                    <span>Coursera • Issued 2024</span>
+                </div>
+                <a href="#" class="btn-sm">Verify Credential</a>
+            </div>
+
+            <div class="cert-item">
+                <div class="cert-text">
+                    <h4>EF SET English Certificate (C1 Advanced)</h4>
+                    <span>EF Standard English Test • Issued 2024</span>
+                </div>
+                <a href="#" class="btn-sm">Verify Credential</a>
+            </div>
+
+            <div class="cert-item">
+                <div class="cert-text">
+                    <h4>Human-Computer Interaction (HCI)</h4>
+                    <span>Interaction Design Foundation • Issued 2023</span>
+                </div>
+                <a href="#" class="btn-sm">Verify Credential</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="contact">
+        <h2>Let's work together.</h2>
+        <p>Available for research projects and UI design collaborations.</p>
+        <a href="mailto:email@fajri.com" class="footer-link">fajri@example.com</a>
+        <div style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.5;">
+            &copy; 2025 Fajri. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

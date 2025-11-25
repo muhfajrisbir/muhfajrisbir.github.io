@@ -230,16 +230,6 @@
             .mobile-chips-top, .mobile-chips-bottom { display: none; } 
             .desktop-chips-container { display: block; }
         }
-        @media (max-width: 768px) {
-            .desktop-chips-container { display: none; } 
-            .mobile-chips-top, .mobile-chips-bottom { display: flex; }
-            nav { padding: 1rem 5%; } 
-            .nav-link { display: none; } 
-            .hero { min-height: 100vh; padding: 0 20px; } 
-            .hero h1 { font-size: 2.6rem; }
-            .project-grid { grid-template-columns: 1fr; }
-            .cert-item { flex-direction: column; align-items: flex-start; }
-        }
 
         /* --- MAIN CONTAINER --- */
         .container { 
@@ -272,7 +262,6 @@
             flex-direction: column; 
             max-width: 400px;
         }
-        @media (max-width: 768px) { .project-card { max-width: 100%; } }
         .project-card:hover { 
             border-color: var(--lime); 
             transform: translateY(-5px); 
@@ -376,20 +365,6 @@
         }
         .lab-card:hover .lab-img-wrapper img { transform: scale(1.05); }
 
-        @media (max-width: 768px) {
-            .lab-grid { grid-template-columns: 1fr; }
-            .lab-card { 
-                flex-direction: column-reverse;
-                height: auto;
-                background: var(--black);
-            }
-            .lab-img-wrapper { height: 200px; flex: none; }
-            .lab-img-wrapper::after { 
-                background: linear-gradient(to top, var(--black) 0%, transparent 50%); 
-            }
-            .lab-content { padding: 1.5rem; }
-        }
-
         /* --- CERTIFICATES --- */
         .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
         .cert-item {
@@ -422,6 +397,50 @@
         footer h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--lime); }
         footer p { color: #aaa; margin-bottom: 2rem; }
         .footer-link { color: white; font-weight: 600; border-bottom: 1px solid var(--lime); padding-bottom: 2px; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .desktop-chips-container { display: none; } 
+            .mobile-chips-top, .mobile-chips-bottom { display: flex; }
+            
+            nav { padding: 1rem 5%; } 
+            .nav-link { display: none; } 
+            
+            /* HERO FIX */
+            .hero { 
+                min-height: 85vh; /* Biar gak mepet bawah */
+                padding: 4rem 20px 6rem; 
+                display: flex;
+                flex-direction: column;
+                justify-content: center; 
+            }
+            
+            .hero-content {
+                gap: 1.2rem;
+                padding: 0;
+            }
+
+            .hero h1 { font-size: 2.4rem; }
+            
+            .project-card { max-width: 100%; }
+            .project-grid { grid-template-columns: 1fr; }
+            
+            /* LAB GRID MOBILE */
+            .lab-grid { grid-template-columns: 1fr; }
+            .lab-card { 
+                flex-direction: column-reverse;
+                height: auto;
+                background: var(--black);
+            }
+            .lab-img-wrapper { height: 200px; flex: none; }
+            .lab-img-wrapper::after { 
+                background: linear-gradient(to top, var(--black) 0%, transparent 50%); 
+            }
+            .lab-content { padding: 1.5rem; }
+            
+            .cert-item { flex-direction: column; align-items: flex-start; }
+            .btn-cred { width: 100%; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -461,7 +480,7 @@
                 <div class="chip">Business Metrics</div>
             </div>
 
-            <!-- CTA button (always at the bottom) -->
+            <!-- Tombol Download CV (Di Bawah Chip Mobile) -->
             <a href="#" class="btn-main">
                 Download CV 
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -509,16 +528,17 @@
                 </div>
             </article>
 
-            <!-- Monostdio Photobooth -->
+            <!-- Monostdio (Image Updated: Kamera Instant / Photobooth Vibes) -->
             <article class="lab-card fade-up delay-200">
                 <div class="lab-content">
                     <span class="lab-tag">Web App</span>
-                    <h3>Monostdio Online Photobooth</h3>
+                    <h3>Monostdio - Online Photobooth</h3>
                     <p>A browser-based photobooth that lets people capture, preview, and download photos with custom styling.</p>
-                    <a href="https://monostdio.vercel.app/" target="_blank" class="view-link">Open Photobooth &rarr;</a>
+                    <a href="https://monostdio.vercel.app/" target="_blank" class="view-link">Open Monostdio &rarr;</a>
                 </div>
                 <div class="lab-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?q=80&w=800&auto=format&fit=crop" alt="Online Photobooth">
+                    <!-- Gambar kamera instant / photostrip vibes (Lebih relevan) -->
+                    <img src="https://media-api.xogrp.com/images/1935dba9-e9a8-4159-93da-3b306782b964" alt="Monostdio Photobooth">
                 </div>
             </article>
         </div>
@@ -555,7 +575,7 @@
     <footer id="contact" class="fade-up">
         <h2>Let's work together.</h2>
         <p>Available for research projects and UI design collaborations.</p>
-        <a href="mailto:email@fajri.com" class="footer-link">WAIT MASIH RAPIHIN CODE</a>
+        <a href="mailto:email@fajri.com" class="footer-link">fajri@example.com</a>
         <div style="margin-top: 3rem; font-size: 0.8rem; opacity: 0.5;">
             &copy; 2025 Fajri. All Rights Reserved.
         </div>

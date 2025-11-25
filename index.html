@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; } /* Efek scroll halus */
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -31,279 +31,177 @@
         h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* --- NAVBAR (LENGKAP & FUNGSIONAL) --- */
+        /* --- ANIMATION CLASSES --- */
+        /* Kondisi Awal (Tersembunyi) */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px); /* Turun 40px */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        /* Kondisi Aktif (Muncul) */
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay bertingkat untuk elemen berurutan */
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+
+        /* NAVBAR */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 5%;
-            background: var(--lime);
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 5%; background: var(--lime); position: sticky; top: 0;
+            width: 100%; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.15);
         }
-        
-        .logo { 
-            font-weight: 800; 
-            font-size: 1.5rem; 
-            letter-spacing: -0.5px; 
-            color: var(--black);
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-link { 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            color: var(--black); 
-            cursor: pointer;
-            position: relative;
-        }
-        
-        /* Efek garis bawah saat hover */
-        .nav-link::after {
-            content: '';
-            display: block;
-            width: 0;
-            height: 2px;
-            background: var(--black);
-            transition: width 0.3s;
-            margin-top: 2px;
-        }
-        .nav-link:hover::after { width: 100%; }
-
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -0.5px; color: var(--black); }
+        .nav-menu { display: flex; align-items: center; gap: 2rem; }
+        .nav-link { font-weight: 600; font-size: 0.95rem; color: var(--black); cursor: pointer; position: relative; }
+        .nav-link:hover::after { content: ''; display: block; width: 100%; height: 2px; background: var(--black); }
         .btn-contact {
-            background: var(--black);
-            color: var(--lime);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            background: var(--black); color: var(--lime); padding: 0.5rem 1.2rem; border-radius: 50px;
+            font-weight: 600; font-size: 0.9rem; border: 1px solid var(--black);
         }
-        .btn-contact:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .btn-contact:hover { background: transparent; color: var(--black); }
 
-        /* --- HERO SECTION --- */
+        /* HERO SECTION */
         .hero {
-            background: linear-gradient(to bottom, var(--lime) 50%, var(--white) 100%);
-            min-height: 90vh; 
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 20px;
-            overflow: hidden;
+            background-color: var(--lime);
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            min-height: 100vh; 
+            position: relative; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; 
+            padding: 0 20px; overflow: hidden;
         }
+        .hero::before {
+            content: ""; position: absolute; top: 0; left: -50%; width: 200%; height: 100%;
+            background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            transform: skewX(-20deg); animation: shine 6s infinite linear; pointer-events: none;
+        }
+        .hero::after {
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 150px;
+            background: linear-gradient(to bottom, transparent, var(--white)); pointer-events: none;
+        }
+        @keyframes shine { 0% { left: -100%; opacity: 0; } 50% { opacity: 0.5; } 100% { left: 100%; opacity: 0; } }
 
         .hero-content {
-            position: relative;
-            z-index: 10; 
-            max-width: 700px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 2rem 0; /* Tambah padding biar aman dari chip */
+            position: relative; z-index: 10; max-width: 700px; width: 100%;
+            display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 2rem 0;
         }
-
-        .hero h1 {
-            font-size: clamp(2.8rem, 8vw, 5rem);
-            line-height: 1;
-            letter-spacing: -0.03em;
-            margin: 0;
-            color: var(--black);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            max-width: 500px;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-
+        .hero h1 { font-size: clamp(2.8rem, 8vw, 5rem); line-height: 1; letter-spacing: -0.03em; margin: 0; color: var(--black); }
+        .hero p { font-size: 1.1rem; opacity: 0.85; max-width: 500px; line-height: 1.5; font-weight: 500; }
         .btn-main {
-            background: var(--black);
-            color: var(--lime);
-            padding: 0.9rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: var(--black); color: var(--lime); padding: 0.9rem 2rem; border-radius: 50px;
+            font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 1rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); position: relative; z-index: 20;
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.3); }
 
-        /* --- CHIPS (SOLID & FLOATING) --- */
+        /* CHIP STYLE */
         .chip {
-            position: absolute;
-            background: var(--white); /* Putih Solid */
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Bayangan halus */
-            border: 1px solid rgba(0,0,0,0.05);
-            z-index: 5; /* Tetap di bawah teks (z-index 10), tapi di atas background */
-            white-space: nowrap;
-            pointer-events: none; 
+            background: var(--white); padding: 0.6rem 1.2rem; border-radius: 50px;
+            font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05); z-index: 5; white-space: nowrap; 
         }
+        .desktop-chips-container .chip { position: absolute; pointer-events: none; }
+        .chip-1 { top: -40px; left: -100px; animation: float 5s ease-in-out infinite; }
+        .chip-2 { top: 20px; right: -110px; animation: float 6s ease-in-out infinite 1s; }
+        .chip-3 { bottom: 60px; left: -120px; animation: float 5.5s ease-in-out infinite 0.5s; }
+        .chip-4 { bottom: 30px; right: -90px; animation: float 6.5s ease-in-out infinite 1.5s; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .mobile-chips-top, .mobile-chips-bottom { display: none; width: 100%; justify-content: space-between; padding: 0 1rem; margin: 0.5rem 0; }
 
-        /* Posisi Desktop */
         @media (min-width: 769px) {
-            .chip:nth-child(1) { top: -40px; left: -100px; animation: float 5s ease-in-out infinite; }
-            .chip:nth-child(2) { top: 20px; right: -110px; animation: float 6s ease-in-out infinite 1s; }
-            .chip:nth-child(3) { bottom: 60px; left: -120px; animation: float 5.5s ease-in-out infinite 0.5s; }
-            .chip:nth-child(4) { bottom: 30px; right: -90px; animation: float 6.5s ease-in-out infinite 1.5s; }
+            .mobile-chips-top, .mobile-chips-bottom { display: none; } .desktop-chips-container { display: block; }
+        }
+        @media (max-width: 768px) {
+            .desktop-chips-container { display: none; } .mobile-chips-top, .mobile-chips-bottom { display: flex; }
+            nav { padding: 1rem 5%; } .nav-link { display: none; } 
+            .hero { min-height: 100vh; padding-top: 2rem; padding-bottom: 2rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .project-grid { grid-template-columns: 1fr; }
+            .cert-item { flex-direction: column; align-items: flex-start; }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* --- MAIN CONTAINER --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 5% 6rem;
-        }
-
+        /* CONTAINER */
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 5% 6rem; }
         .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 2.5rem;
-            border-bottom: 2px solid var(--gray-light);
-            display: inline-block;
-            padding-right: 2rem;
+            font-size: 2.2rem; margin-bottom: 2.5rem; border-bottom: 2px solid var(--gray-light);
+            display: inline-block; padding-right: 2rem;
         }
 
-        /* --- PROJECTS GRID --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
-        }
-
+        /* PROJECTS */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 5rem; }
         .project-card {
-            background: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
+            background: var(--white); border: 1px solid var(--border-color); border-radius: 12px;
+            overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; max-width: 400px;
         }
+        @media (max-width: 768px) { .project-card { max-width: 100%; } }
         .project-card:hover { border-color: var(--lime); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        
         .card-img { height: 180px; width: 100%; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
         .project-card:hover .card-img img { transform: scale(1.05); }
-
         .card-info { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; }
         .tag { font-size: 0.7rem; font-weight: 800; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.5rem; }
         .card-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; line-height: 1.3; }
         .card-info p { font-size: 0.9rem; color: #555; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1; }
         .view-btn { font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; color: var(--black); }
 
-        /* --- CERTIFICATES --- */
+        /* CERTS */
         .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
-        .cert-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 1.5rem;
-            background: var(--white);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--lime);
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        .cert-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
-        .cert-text span { font-size: 0.85rem; color: #666; }
-        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border: 1px solid #ddd; border-radius: 6px; }
+        .cert-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--white); border: 1px solid var(--border-color); border-radius: 12px; transition: 0.3s; }
+        .cert-item:hover { box-shadow: 0 5px 20px rgba(0,0,0,0.05); border-color: #ccc; }
+        .cert-logo { width: 48px; height: 48px; border-radius: 8px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #555; flex-shrink: 0; }
+        .cert-content h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .cert-content p { font-size: 0.9rem; color: #444; margin-bottom: 0.2rem; font-weight: 500; }
+        .cert-content span { font-size: 0.85rem; color: #666; display: block; margin-bottom: 1rem; }
+        .btn-cred { padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600; border: 1px solid #000; border-radius: 50px; display: inline-block; }
+        .btn-cred:hover { background: #f5f5f5; }
 
-        /* --- FOOTER --- */
-        footer {
-            background: linear-gradient(to top, var(--black) 0%, #1a1a1a 100%);
-            color: white; padding: 4rem 5%; text-align: center; position: relative; overflow: hidden;
-        }
+        /* FOOTER */
+        footer { background: linear-gradient(to top, var(--black) 0%, #1a1a1a 100%); color: white; padding: 4rem 5%; text-align: center; }
         footer h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--lime); }
         footer p { color: #aaa; margin-bottom: 2rem; }
         .footer-link { color: white; font-weight: 600; border-bottom: 1px solid var(--lime); padding-bottom: 2px; }
-
-        /* --- MOBILE RESPONSIVE FIX --- */
-        @media (max-width: 768px) {
-            /* Navbar Mobile */
-            nav { padding: 0.8rem 5%; }
-            .nav-menu { gap: 1rem; }
-            .nav-link { display: none; } /* Sembunyikan menu text di mobile biar gak penuh */
-            .btn-contact { display: block; } /* Tombol contact tetap ada */
-            
-            /* Hero Mobile */
-            .hero {
-                min-height: auto;
-                padding-top: 3rem;
-                padding-bottom: 5rem;
-            }
-
-            /* CHIP MOBILE (POSISI AMAN) */
-            /* Letakkan chips di area padding kosong Hero, bukan di tengah teks */
-            .chip {
-                font-size: 0.7rem; 
-                padding: 0.5rem 0.9rem;
-            }
-            
-            /* Kiri Atas Jauh */
-            .chip:nth-child(1) { top: -20px; left: -10px; animation: float 4s infinite; }
-            /* Kanan Atas Jauh */
-            .chip:nth-child(2) { top: -10px; right: -10px; animation: float 5s infinite 1s; }
-            /* Kiri Bawah Jauh */
-            .chip:nth-child(3) { top: auto; bottom: -30px; left: 0; animation: float 4.5s infinite 0.5s; }
-            /* Kanan Bawah Jauh */
-            .chip:nth-child(4) { top: auto; bottom: -20px; right: 0; animation: float 6s infinite 1.5s; }
-
-            .project-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .cert-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
-            .btn-sm { width: 100%; text-align: center; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar Lengkap & Sticky -->
     <nav>
         <div class="logo">FAJRI.</div>
         <div class="nav-menu">
-            <!-- Menu Navigasi -->
             <a href="#projects" class="nav-link">Projects</a>
             <a href="#certs" class="nav-link">Certificates</a>
-            <!-- Tombol Contact -->
             <a href="#contact" class="btn-contact">Let's Talk</a>
         </div>
     </nav>
 
     <header class="hero">
-        <div class="hero-content">
-            <!-- Chips Putih Solid & Floating Aman -->
-            <div class="chip">User Research</div>
-            <div class="chip">UI Design</div>
-            <div class="chip">Prototyping</div>
-            <div class="chip">Business Metrics</div>
+        <div class="hero-content fade-up">
+            <div class="desktop-chips-container">
+                <div class="chip chip-1">User Research</div>
+                <div class="chip chip-2">UI Design</div>
+                <div class="chip chip-3">Prototyping</div>
+                <div class="chip chip-4">Business Metrics</div>
+            </div>
+            <div class="mobile-chips-top">
+                <div class="chip">User Research</div>
+                <div class="chip">UI Design</div>
+            </div>
 
             <h1>Designing for<br>Real Impact.</h1>
-            <p>
-                Researcher & UI Designer. Mengubah data kompleks menjadi antarmuka yang sederhana dan fungsional.
-            </p>
+            <p>Researcher & UI Designer. Transforming complex data into simple and functional interfaces.</p>
+
+            <div class="mobile-chips-bottom">
+                <div class="chip">Prototyping</div>
+                <div class="chip">Business Metrics</div>
+            </div>
 
             <a href="#" class="btn-main">
                 Download CV 
@@ -314,81 +212,55 @@
 
     <main class="container">
         
-        <!-- ID Projects untuk Scroll Navigasi -->
-        <div id="projects" style="padding-top: 2rem; margin-top: -2rem;"></div>
-        <h2 class="section-title">Selected Projects</h2>
+        <div id="projects" style="padding-top: 4rem; margin-top: -4rem;"></div>
+        <!-- Tambahkan class "fade-up" untuk animasi -->
+        <h2 class="section-title fade-up">Selected Projects</h2>
         
         <div class="project-grid">
-            <article class="project-card">
+            <article class="project-card fade-up delay-100">
                 <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1000&auto=format&fit=crop" alt="UI Design">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=1000&auto=format&fit=crop" alt="Kitabisa Voluntrip">
                 </div>
                 <div class="card-info">
-                    <span class="tag">App Redesign</span>
-                    <h3>iJakarta Library</h3>
-                    <p>Redesign aplikasi perpustakaan digital untuk meningkatkan retensi pembaca.</p>
-                    <div class="view-btn">View Case Study &rarr;</div>
-                </div>
-            </article>
-
-            <article class="project-card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Data Research">
-                </div>
-                <div class="card-info">
-                    <span class="tag">Research</span>
-                    <h3>Thesis Study</h3>
-                    <p>Studi validasi kepuasan pengguna (Mixed-Methods) dengan skala Likert.</p>
-                    <div class="view-btn">Read Abstract &rarr;</div>
-                </div>
-            </article>
-
-            <article class="project-card">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop" alt="Dashboard">
-                </div>
-                <div class="card-info">
-                    <span class="tag">Dashboard</span>
-                    <h3>CRM Analytics</h3>
-                    <p>Visualisasi data pelanggan B2B untuk tracking KPI bisnis real-time.</p>
-                    <div class="view-btn">View Prototype &rarr;</div>
+                    <span class="tag">Case Study</span>
+                    <h3>Voluntrip Ticket Integration in Kitabisa App</h3>
+                    <p>UI/UX case study on integrating volunteer activity ticket purchasing features.</p>
+                    <a href="https://medium.com/@muhfajrisbir/studi-kasus-ui-ux-integrasi-pembelian-tiket-voluntrip-di-aplikasi-kitabisa-926b05b4bed8" target="_blank" class="view-btn">
+                        Read on Medium &rarr;
+                    </a>
                 </div>
             </article>
         </div>
 
-        <!-- ID Certs untuk Scroll Navigasi -->
         <div id="certs" style="padding-top: 4rem; margin-top: -4rem;"></div>
-        <h2 class="section-title">Certifications</h2>
+        <h2 class="section-title fade-up">Certifications</h2>
 
         <div class="cert-list">
-            <div class="cert-item">
-                <div class="cert-text">
-                    <h4>Google UX Design Professional Certificate</h4>
-                    <span>Coursera • Issued 2024</span>
+            <div class="cert-item fade-up delay-100">
+                <div class="cert-logo" style="background: #E0F2F1; color: #00695C;">IBM</div>
+                <div class="cert-content">
+                    <h4>User Experience Design Fundamentals</h4>
+                    <p>IBM</p>
+                    <span>Issued Nov 2024</span>
+                    <a href="#" class="btn-cred">Show credential &#8599;</a>
                 </div>
-                <a href="#" class="btn-sm">Verify Credential</a>
             </div>
 
-            <div class="cert-item">
-                <div class="cert-text">
-                    <h4>EF SET English Certificate (C1 Advanced)</h4>
-                    <span>EF Standard English Test • Issued 2024</span>
+            <div class="cert-item fade-up delay-200">
+                <div class="cert-logo" style="background: #E3F2FD; color: #1565C0;">G</div>
+                <div class="cert-content">
+                    <h4>Foundations of User Experience (UX) Design</h4>
+                    <p>Google</p>
+                    <span>Issued Mar 2024</span>
+                    <span style="font-size: 0.75rem; margin-top: -0.5rem; margin-bottom: 1rem; opacity: 0.7;">Credential ID WP7N5TBPHNEQ</span>
+                    <a href="#" class="btn-cred">Show credential &#8599;</a>
                 </div>
-                <a href="#" class="btn-sm">Verify Credential</a>
-            </div>
-
-            <div class="cert-item">
-                <div class="cert-text">
-                    <h4>Human-Computer Interaction (HCI)</h4>
-                    <span>Interaction Design Foundation • Issued 2023</span>
-                </div>
-                <a href="#" class="btn-sm">Verify Credential</a>
             </div>
         </div>
 
     </main>
 
-    <footer id="contact">
+    <footer id="contact" class="fade-up">
         <h2>Let's work together.</h2>
         <p>Available for research projects and UI design collaborations.</p>
         <a href="mailto:email@fajri.com" class="footer-link">fajri@example.com</a>
@@ -396,6 +268,25 @@
             &copy; 2025 Fajri. All Rights Reserved.
         </div>
     </footer>
+
+    <!-- Script Animasi Scroll -->
+    <script>
+        // Observer untuk mendeteksi elemen masuk layar
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible'); // Tambah class visible
+                }
+            });
+        }, {
+            threshold: 0.1 // Animasi mulai saat 10% elemen terlihat
+        });
+
+        // Pilih semua elemen dengan class "fade-up"
+        document.querySelectorAll('.fade-up').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
 
 </body>
 </html>
